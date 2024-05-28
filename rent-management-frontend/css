@@ -1,0 +1,13 @@
+rent-management-frontend/
+  src/
+    components/
+      Header.js
+      TenantList.js
+      BillForm.js
+      BillList.js
+      Footer.js
+      TenantDetails.js
+    App.js
+    index.js
+rent-management-backend/
+  server.js
