@@ -4,7 +4,7 @@ import React from 'react';
 const Header = () => {
   return (
     <header>
-      <h1>Rent Management System</h1>
+      <h1> Wagaki Flats Rent Management System</h1>
     </header>
   );
 };

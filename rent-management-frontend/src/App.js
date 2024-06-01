@@ -1,15 +1,11 @@
-// rent-management-frontend/src/App.js
 import React, { useState, useEffect } from 'react';
-import Header from './components/Header'; // Correct import path
-import TenantList from './components/TenantList'; // Correct import path
-import BillForm from './components/BillForm'; // Correct import path
-import BillList from './components/BillList'; // Correct import path
-import Footer from './components/Footer'; // Correct import path
-import TenantDetails from './components/TenantDetails'; // Correct import path
+import axios from 'axios';
+import Header from './components/Header';
+import TenantList from './components/TenantList';
+import BillForm from './components/BillForm';
+import TenantDetails from './components/TenantDetails';
+import Footer from './components/Footer';
 
-const App = () => {
-  // Component logic...
-};
 const App = () => {
   // State variables
   const [tenants, setTenants] = useState([]);
@@ -41,7 +37,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <Header />
+      {<Header /> }
       <main>
         <TenantList tenants={tenants} />
         <BillForm onSubmit={addBill} />
