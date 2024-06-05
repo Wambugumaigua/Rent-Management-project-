@@ -1,10 +1,11 @@
+
 import React, { useState } from 'react';
 import axios from 'axios';
 
 const RentPaymentForm = () => {
   const [tenantName, setTenantName] = useState('');
   const [houseNumber, setHouseNumber] = useState('');
-  const [paymentAmount, setPaymentAmount] = useState('');
+  const [paidAmount, setPaidAmount] = useState('');
 
   const handleTenantNameChange = (e) => {
     setTenantName(e.target.value);
@@ -14,8 +15,8 @@ const RentPaymentForm = () => {
     setHouseNumber(e.target.value);
   };
 
-  const handlePaymentAmountChange = (e) => {
-    setPaymentAmount(e.target.value);
+  const handlePaidAmountChange = (e) => {
+    setPaidAmount(e.target.value);
   };
 
   const handleSubmit = async (e) => {
@@ -26,13 +27,13 @@ const RentPaymentForm = () => {
       await axios.post('/api/rent-payments', {
         tenantName,
         houseNumber,
-        paymentAmount
+        paidAmount
       });
 
       // Clear form fields after successful submission
       setTenantName('');
       setHouseNumber('');
-      setPaymentAmount('');
+      setPaidAmount('');
 
       // Optionally, display a success message or redirect the user
       alert('Rent payment information submitted successfully!');
@@ -65,12 +66,12 @@ const RentPaymentForm = () => {
           required
         />
 
-        <label htmlFor="paymentAmount">Payment Amount:</label>
+        <label htmlFor="paidAmount">Paid Amount:</label>
         <input
           type="number"
-          id="paymentAmount"
-          value={paymentAmount}
-          onChange={handlePaymentAmountChange}
+          id="paidAmount"
+          value={paidAmount}
+          onChange={handlePaidAmountChange}
           required
         />
 

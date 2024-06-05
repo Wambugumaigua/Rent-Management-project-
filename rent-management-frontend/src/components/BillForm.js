@@ -3,9 +3,10 @@ import './BillForm.css'; // Import CSS file for styling
 import PaymentMethod from './PaymentMethod'; // Import PaymentMethod component
 import RentPaymentForm from './RentPaymentForm'; // Import RentPaymentForm component
 
-const BillForm = ({ onSubmit }) => {
+const BillForm = () => {
   const [billData, setBillData] = useState({ rentAmount: '', waterBill: '', wifiBill: '', garbageBill: '', totalBill: '' });
   const [billsList, setBillsList] = useState([]);
+  const [paymentStatus, setPaymentStatus] = useState('');
 
   // Load data from localStorage on component mount
   useEffect(() => {
@@ -28,7 +29,6 @@ const BillForm = ({ onSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setBillsList([...billsList, billData]);
-    onSubmit(billData);
     setBillData({ rentAmount: '', waterBill: '', wifiBill: '', garbageBill: '', totalBill: '' });
   };
 
@@ -38,11 +38,27 @@ const BillForm = ({ onSubmit }) => {
     setBillsList(updatedBillsList);
   };
 
+  const handlePaymentSubmit = (paymentDetails) => {
+    // Process payment details here (e.g., send to backend)
+    console.log('Payment details:', paymentDetails);
+
+    // Update payment status
+    setPaymentStatus('Payment processed successfully!');
+  };
+
   return (
     <div className="bill-form-container"> {/* Add a class for styling */}
       <h2>Add Bill</h2>
       <form onSubmit={handleSubmit}>
         {/* Bill details inputs */}
+        <label htmlFor="Name"> Name:</label>
+        <input
+          type="text"
+          id="tenantName"
+          name="tenantName"
+          value={billData.tenantName}
+          onChange={handleChange}
+        />
         <label htmlFor="rentAmount">Rent Amount:</label>
         <input
           type="text"
@@ -67,7 +83,7 @@ const BillForm = ({ onSubmit }) => {
           value={billData.wifiBill}
           onChange={handleChange}
         />
-        <label htmlFor="garbageBill">Garbage Bill:</label>
+        <label htmlFor="garbageBill">Garbage :</label>
         <input
           type="text"
           id="garbageBill"
@@ -84,11 +100,11 @@ const BillForm = ({ onSubmit }) => {
           onChange={handleChange}
         />
         {/* Other bill input fields... */}
-        <button type="submit" className="button">Submit</button> {/* Apply the button class */}
+        <button type="submit" className="blue-button">Submit</button> {/* Apply the blue-button class */}
       </form>
 
       {/* Render the PaymentMethod component */}
-      <PaymentMethod />
+      <PaymentMethod onSubmit={handlePaymentSubmit} paymentStatus={paymentStatus} />
 
       {/* Render the RentPaymentForm component */}
       <RentPaymentForm />
@@ -105,13 +121,12 @@ const BillForm = ({ onSubmit }) => {
               <p>Water: {bill.waterBill}</p>
               <p>Total: {bill.totalBill}</p>
               <div className="button-container"> {/* Add a class for styling */}
-                <button className="button" onClick={() => handleDeleteBill(index)}>Delete</button> {/* Apply the button class */}
+                <button className="blue-button" onClick={() => handleDeleteBill(index)}>Delete</button> {/* Apply the blue-button class */}
               </div>
             </li>
           ))}
         </ul>
       </div>
-
     </div>
   );
 };
